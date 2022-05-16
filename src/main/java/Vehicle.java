@@ -1,6 +1,6 @@
 public class Vehicle {
 
-    String licensePlate;
+    String plate;
     Long renavamVehicle;
     String chassisVehicle;
     String colorVehicle;
@@ -9,10 +9,10 @@ public class Vehicle {
     long mileageVehicle;
     double locationValue;
 
-    public Vehicle(String licensePlate, Long renavamVehicle, String chassisVehicle,
+    public Vehicle(String plate, Long renavamVehicle, String chassisVehicle,
                    String colorVehicle, int carDoorNumber, int fuelType, long mileageVehicle,
                    double locationValue) {
-        this.licensePlate = licensePlate;
+        this.plate = plate;
         this.renavamVehicle = renavamVehicle;
         this.chassisVehicle = chassisVehicle;
         this.colorVehicle = colorVehicle;
@@ -26,12 +26,12 @@ public class Vehicle {
         return null;
     }
 
-    public String getLicensePlate() {
-        return licensePlate;
+    public String getPlate() {
+        return plate;
     }
 
-    public void setLicensePlate(String licensePlate) {
-        this.licensePlate = licensePlate;
+    public void setPlate(String licensePlate) {
+        this.plate = licensePlate;
     }
 
     public Long getRenavamVehicle() {
