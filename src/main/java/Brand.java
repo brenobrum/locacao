@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Brand {
     String brandDescription;
-    Model model;
+    ArrayList<Model> models;
 
     public Brand(String brandDescription) {
         this.brandDescription = brandDescription;
@@ -16,5 +16,11 @@ public class Brand {
         this.brandDescription = brandDescription;
     }
 
+    public void addModel(Model model) {
+        models.add(model);
+    }
 
+    public ArrayList<Model> getModels() {
+        return models;
+    }
 }

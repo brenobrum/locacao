@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class Model {
     String modelDescription;
     Brand brand;
+
     public Model(String modelDescription) {
         this.modelDescription = modelDescription;
     }
