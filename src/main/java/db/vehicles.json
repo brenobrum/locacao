@@ -1,0 +1,22 @@
+[
+  {
+    "plate": "MKK-2345",
+    "renavamVehicle": "12345678901",
+    "chassisVehicle": "A4123B5467ADSCEG",
+    "colorVehicle": "Red",
+    "carDoorNumber": 4,
+    "fuelType": "Diesel",
+    "mileageVehicle": "123456",
+    "locationValue": 100
+  },
+  {
+    "plate": "ABC-1234",
+    "renavamVehicle": "09876543210",
+    "chassisVehicle": "B123QWE567TYUIO",
+    "colorVehicle": "Yellow",
+    "carDoorNumber": 6,
+    "fuelType": "Gasoline",
+    "mileageVehicle": "234567",
+    "locationValue": 150
+  }
+]
