@@ -27,7 +27,7 @@ public class Main {
                 clientList.add(new Client(cpf, name, address, phone, email));
             }
         }catch (FileNotFoundException e){
-            System.out.println("Arquivo \"words.json\" não foi encontrado.");
+            System.out.println("Arquivo \"clients.json\" não foi encontrado.");
         }
         return clientList;
     }
@@ -40,26 +40,35 @@ public class Main {
             JsonArray jsonArray = jsonElement.getAsJsonArray();
             for (JsonElement object : jsonArray){
                 JsonObject client = object.getAsJsonObject();
-                String name = client.get("name").getAsString();
-                String cpf = client.get("cpf").getAsString();
-                String address = client.get("address").getAsString();
-                String phone = client.get("phone").getAsString();
-                String email = client.get("email").getAsString();
+                String plate = client.get("plate").getAsString();
+                Long renavamVehicle = client.get("renavamVehicle").getAsLong();
+                String chassisVehicle = client.get("chassisVehicle").getAsString();
+                String colorVehicle = client.get("colorVehicle").getAsString();
+                int carDoorNumber = client.get("carDoorNumber").getAsInt();
+                int fuelType = client.get("fuelType").getAsInt();
+                long mileageVehicle = client.get("mileageVehicle").getAsLong();
+                double locationValue = client.get("locationValue").getAsDouble();
 
-                vehiclesList.add(new Vehicle(cpf, name, address, phone, email));
+                vehiclesList.add(new Vehicle(plate, renavamVehicle, chassisVehicle,
+                         colorVehicle, carDoorNumber, fuelType, mileageVehicle, locationValue));
             }
         }catch (FileNotFoundException e){
-            System.out.println("Arquivo \"words.json\" não foi encontrado.");
+            System.out.println("Arquivo \"vehicles.json\" não foi encontrado.");
         }
         return vehiclesList;
     }
 
     public static void main(String[] args) {
         ArrayList<Client> clientList = getClientList();
-
         System.out.println("Lista de Clientes:");
         for (Client client : clientList){
             System.out.println(client.getName());
+        }
+
+        ArrayList<Vehicle> vehiclesList = getVehicleList();
+        System.out.println("Lista de veiculos:");
+        for (Vehicle vehicle : vehiclesList){
+            System.out.println(vehicle.getPlate());
         }
 
 
