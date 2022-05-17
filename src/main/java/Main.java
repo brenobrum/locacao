@@ -6,56 +6,8 @@ import com.google.gson.*;
 
 public class Main {
 
-    public static ArrayList<Client> getClientList() {
-        File file = new File("src\\main\\java\\db\\clients.json");
-        ArrayList<Client> clientList = new ArrayList<>();
-        try {
-            JsonElement jsonElement = JsonParser.parseReader(new FileReader(file));
-            JsonArray jsonArray = jsonElement.getAsJsonArray();
-            for (JsonElement object : jsonArray) {
-                JsonObject client = object.getAsJsonObject();
-                String name = client.get("name").getAsString();
-                String cpf = client.get("cpf").getAsString();
-                String address = client.get("address").getAsString();
-                String phone = client.get("phone").getAsString();
-                String email = client.get("email").getAsString();
-
-                clientList.add(new Client(cpf, name, address, phone, email));
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("Arquivo \"clients.json\" não foi encontrado.");
-        }
-        return clientList;
-    }
-
-    public static ArrayList<Vehicle> getVehicleList() {
-        File file = new File("src\\main\\java\\db\\vehicles.json");
-        ArrayList<Vehicle> vehiclesList = new ArrayList<>();
-        try {
-            JsonElement jsonElement = JsonParser.parseReader(new FileReader(file));
-            JsonArray jsonArray = jsonElement.getAsJsonArray();
-            for (JsonElement object : jsonArray) {
-                JsonObject client = object.getAsJsonObject();
-                String plate = client.get("plate").getAsString();
-                Long renavamVehicle = client.get("renavamVehicle").getAsLong();
-                String chassisVehicle = client.get("chassisVehicle").getAsString();
-                String colorVehicle = client.get("colorVehicle").getAsString();
-                int carDoorNumber = client.get("carDoorNumber").getAsInt();
-                int fuelType = client.get("fuelType").getAsInt();
-                long mileageVehicle = client.get("mileageVehicle").getAsLong();
-                double locationValue = client.get("locationValue").getAsDouble();
-
-                vehiclesList.add(new Vehicle(plate, renavamVehicle, chassisVehicle,
-                        colorVehicle, carDoorNumber, fuelType, mileageVehicle, locationValue));
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("Arquivo \"vehicles.json\" não foi encontrado.");
-        }
-        return vehiclesList;
-    }
-
     public static void printClientList() {
-        ArrayList<Client> clientList = getClientList();
+        ArrayList<Client> clientList = Search.getClientList();
         System.out.println("Lista de veiculos:");
 
         for (int i = 0; i < clientList.size(); i++) {
@@ -64,7 +16,7 @@ public class Main {
     }
 
     public static void printVehicleList() {
-        ArrayList<Vehicle> vehicleList = getVehicleList();
+        ArrayList<Vehicle> vehicleList = Search.getVehicleList();
         System.out.println("Lista de Clientes:");
 
         for (int i = 0; i < vehicleList.size(); i++) {
@@ -97,7 +49,7 @@ public class Main {
     }
 
     public static void editClient(int index) {
-        ArrayList<Client> clientList = getClientList();
+        ArrayList<Client> clientList = Search.getClientList();
         Client client = clientList.get(index);
         Scanner scan = new Scanner(System.in);
         boolean isValid = true;
@@ -144,7 +96,7 @@ public class Main {
 
     public static void addToJson(String cpf, String name, String address, String phone, String email) {
         Client client = new Client(cpf, name, address, phone, email);
-        ArrayList<Client> clientList = getClientList();
+        ArrayList<Client> clientList = Search.getClientList();
         clientList.add(client);
         editClientList(clientList);
     }
@@ -190,6 +142,9 @@ public class Main {
                 } else {
                     System.out.println("Opcao invalida!");
                 }
+
+
+
             }
 
             printVehicleList();
