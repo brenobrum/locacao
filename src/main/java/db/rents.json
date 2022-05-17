@@ -1,13 +1,14 @@
 [
   {
-    "rentDate": "2019-01-01 12:00",
-    "returnDate": "2019-01-01 12:00",
+    "rentDate": "2022-01-01 12:00",
+    "returnDate": "2022-01-01 12:00",
+    "foreseenReturnDate": "2022-07-02 12:00",
     "rentMileage": 100,
     "returnMileage": null,
     "bailValue": 100.00,
     "rentValue": 90.00,
     "returned": false,
-    "rentVehiclePlate": "DFA-1234",
+    "rentVehiclePlate": "ABC-1234",
     "clientCPF": "1293018992"
   }
 ]

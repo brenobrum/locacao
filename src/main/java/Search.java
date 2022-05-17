@@ -8,10 +8,19 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Search {
+
+    public static void main(String[] args) {
+        ArrayList<Vehicle> vehicleList = getAvailableVehiclesList();
+        for (Vehicle vehicle : vehicleList) {
+            System.out.println(vehicle.getPlate());
+        }
+        System.out.println("A");
+    }
 
     public static ArrayList<Model> getModelList() {
         File file = new File("src\\main\\java\\db\\models.json");
@@ -113,6 +122,7 @@ public class Search {
                 JsonObject rent = object.getAsJsonObject();
                 Date rentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(rent.get("rentDate").getAsString());
                 Date returnDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(rent.get("returnDate").getAsString());
+                Date foreseenReturnDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(rent.get("foreseenReturnDate").getAsString());
                 Long rentMileage = rent.get("rentMileage").getAsLong();
                 Long returnMileage = rent.get("rentMileage").getAsLong();
                 double bailValue = rent.get("rentMileage").getAsDouble();
@@ -121,7 +131,7 @@ public class Search {
                 String rentVehiclePlate = rent.get("rentVehiclePlate").getAsString();
                 String clientCPF = rent.get("clientCPF").getAsString();
 
-                rentList.add(new Rent(rentDate, returnDate, rentMileage, returnMileage, bailValue,
+                rentList.add(new Rent(rentDate, returnDate, foreseenReturnDate, rentMileage, returnMileage, bailValue,
                         rentValue, returned, rentVehiclePlate, clientCPF));
             }
         } catch (FileNotFoundException e) {
@@ -130,5 +140,15 @@ public class Search {
             e.printStackTrace();
         }
         return rentList;
+    }
+
+    public static ArrayList<Vehicle> getAvailableVehiclesList() {
+        ArrayList<Rent> rentList = getRentsList();
+        ArrayList<Vehicle> vehiclesList = getVehicleList();
+
+        for (Rent rent : rentList) {
+            vehiclesList.removeIf(vehicle -> rent.getVehicle().equals(vehicle.getPlate()) && !rent.isReturned());
+        }
+        return vehiclesList;
     }
 }

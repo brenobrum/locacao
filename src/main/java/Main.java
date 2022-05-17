@@ -143,8 +143,6 @@ public class Main {
                     System.out.println("Opcao invalida!");
                 }
             }
-
-            
             printVehicleList();
         } else if (option == 2) {
             System.out.println("Devolver veiculo:");

@@ -89,7 +89,7 @@ public class Rent {
         this.rentValue = rentValue;
     }
 
-    public Boolean getReturned() {
+    public Boolean isReturned() {
         return returned;
     }
 
