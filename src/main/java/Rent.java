@@ -11,11 +11,21 @@ public class Rent {
     private double bailValue;
     private String rentValue;
     private Boolean returned;
+    private Vehicle vehicle;
 
-    public Rent(Date rentDate, Time rentTime) {
+    public Rent(Date rentDate, Time rentTime ,Vehicle vehicle) {
         this.rentDate = rentDate;
         this.rentTime = rentTime;
+        this.vehicle = vehicle;
         this.returned = false;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 
     public Date getRentDate() {
