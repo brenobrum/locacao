@@ -176,7 +176,7 @@ public class Main {
         System.out.println("Lista de veiculos disponiveis:");
 
         for (int i = 0; i < vehicleList.size(); i++) {
-            System.out.println(i + " - " + vehicleList.get(i).getPlate());
+            System.out.println(i + " - " + vehicleList.get(i).getPlate() + " - R$" + vehicleList.get(i).getLocationValue());
         }
     }
 
