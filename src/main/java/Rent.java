@@ -1,4 +1,5 @@
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Rent {
@@ -12,11 +13,13 @@ public class Rent {
     private String rentValue;
     private Boolean returned;
     private Vehicle vehicle;
+    private Client client;
 
-    public Rent(Date rentDate, Time rentTime ,Vehicle vehicle) {
+    public Rent(Date rentDate, Time rentTime ,Vehicle vehicle, Client client) {
         this.rentDate = rentDate;
         this.rentTime = rentTime;
         this.vehicle = vehicle;
+        this.client = client;
         this.returned = false;
     }
 

@@ -6,7 +6,6 @@ public class Client {
     private String address;
     private String phone;
     private String email;
-    private ArrayList<Rent> rents;
 
     public Client(String cpf, String name, String address, String phone, String email) {
         this.cpf = cpf;
@@ -14,14 +13,6 @@ public class Client {
         this.address = address;
         this.phone = phone;
         this.email = email;
-    }
-
-    public ArrayList<Rent> getRents() {
-        return rents;
-    }
-
-    public void addRent(Rent rent) {
-        this.rents.add(rent);
     }
 
     public String getCpf() {
