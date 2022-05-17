@@ -6,7 +6,7 @@
     "colorVehicle": "Vermelho",
     "carDoorNumber": 4,
     "fuelType": 2,
-    "mileageVehicle": 123456,
+    "vehicleMileage": 123456,
     "locationValue": 100
   },
   {
@@ -16,7 +16,7 @@
     "colorVehicle": "Amarelo",
     "carDoorNumber": 6,
     "fuelType": 1,
-    "mileageVehicle": 234567,
+    "vehicleMileage": 234567,
     "locationValue": 150
   },
   {
@@ -26,7 +26,7 @@
     "colorVehicle": "Azul",
     "carDoorNumber": 4,
     "fuelType": 0,
-    "mileageVehicle": 10000,
+    "vehicleMileage": 10000,
     "locationValue": 200
   },
   {
@@ -36,7 +36,7 @@
     "colorVehicle": "Prata",
     "carDoorNumber": 4,
     "fuelType": 0,
-    "mileageVehicle": 4990,
+    "vehicleMileage": 4990,
     "locationValue": 100
   }
 ]

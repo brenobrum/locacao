@@ -100,11 +100,11 @@ public class Search {
                 String colorVehicle = client.get("colorVehicle").getAsString();
                 int carDoorNumber = client.get("carDoorNumber").getAsInt();
                 int fuelType = client.get("fuelType").getAsInt();
-                long mileageVehicle = client.get("mileageVehicle").getAsLong();
+                long vehicleMileage = client.get("vehicleMileage").getAsLong();
                 double locationValue = client.get("locationValue").getAsDouble();
 
                 vehiclesList.add(new Vehicle(plate, renavamVehicle, chassisVehicle,
-                        colorVehicle, carDoorNumber, fuelType, mileageVehicle, locationValue));
+                        colorVehicle, carDoorNumber, fuelType, vehicleMileage, locationValue));
             }
         } catch (FileNotFoundException e) {
             System.out.println("Arquivo \"vehicles.json\" não foi encontrado.");
