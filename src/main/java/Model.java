@@ -24,7 +24,7 @@ public class Model {
         this.modelDescription = modelDescription;
     }
 
-    public ArrayList<Brand> getBrands() {
+    public ArrayList<Brand> getBrandss() {
         return brands;
     }
 }
