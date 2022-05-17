@@ -3,22 +3,23 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Rent {
-    private Date rentDate;
+    private final Date rentDate;
     private Date returnDate;
+    private Date foreseenReturnDate;
     private Long rentMileage;
     private Long returnMileage;
     private double bailValue;
     private double rentValue;
     private Boolean returned;
-    private String rentVehiclePlate;
-    private String clientCPF;
+    private final String rentVehiclePlate;
+    private final String clientCPF;
 
 
-    public Rent(Date rentDate, Date returnDate, Long rentMileage, Long returnMileage,
-                double bailValue, double rentValue, Boolean returned,
-                String rentVehiclePlate, String clientCPF) {
+    public Rent(Date rentDate, Date returnDate, Date foreseenReturnDate, Long rentMileage, Long returnMileage,
+                double bailValue, double rentValue, Boolean returned, String rentVehiclePlate, String clientCPF) {
         this.rentDate = rentDate;
         this.returnDate = returnDate;
+        this.foreseenReturnDate = foreseenReturnDate;
         this.rentMileage = rentMileage;
         this.returnMileage = returnMileage;
         this.bailValue = bailValue;
@@ -34,6 +35,14 @@ public class Rent {
 
     public String getClientCPF() {
         return clientCPF;
+    }
+
+    public Date getForeseenReturnDate() {
+        return foreseenReturnDate;
+    }
+
+    public void setForeseenReturnDate(Date foreseenReturnDate) {
+        this.foreseenReturnDate = foreseenReturnDate;
     }
 
     public Date getRentDate() {
