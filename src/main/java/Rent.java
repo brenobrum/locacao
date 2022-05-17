@@ -12,23 +12,23 @@ public class Rent {
     private double bailValue;
     private String rentValue;
     private Boolean returned;
-    private Vehicle vehicle;
-    private Client client;
+    private String rentVehiclePlate;
+    private String clientCPF;
 
-    public Rent(Date rentDate, Time rentTime ,Vehicle vehicle, Client client) {
+    public Rent(Date rentDate, Time rentTime ,String vehicle, String client) {
         this.rentDate = rentDate;
         this.rentTime = rentTime;
-        this.vehicle = vehicle;
-        this.client = client;
+        this.rentVehiclePlate = vehicle;
+        this.clientCPF = client;
         this.returned = false;
     }
 
-    public Vehicle getVehicle() {
-        return vehicle;
+    public String getVehicle() {
+        return rentVehiclePlate;
     }
 
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
+    public String getClientCPF() {
+        return clientCPF;
     }
 
     public Date getRentDate() {
