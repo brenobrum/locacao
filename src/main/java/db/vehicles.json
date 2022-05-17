@@ -3,7 +3,7 @@
     "plate": "DFA-1234",
     "renavamVehicle": 12345678901,
     "chassisVehicle": "A4123B5467ADSCEG",
-    "colorVehicle": "Red",
+    "colorVehicle": "Vermelho",
     "carDoorNumber": 4,
     "fuelType": 2,
     "mileageVehicle": 123456,
@@ -13,10 +13,30 @@
     "plate": "ABC-1234",
     "renavamVehicle": 9876543210,
     "chassisVehicle": "B123QWE567TYUIO",
-    "colorVehicle": "Yellow",
+    "colorVehicle": "Amarelo",
     "carDoorNumber": 6,
     "fuelType": 1,
     "mileageVehicle": 234567,
     "locationValue": 150
+  },
+  {
+    "plate": "ABC-1234",
+    "renavamVehicle": 523564634641,
+    "chassisVehicle": "LKJHDAS7ADSCEG",
+    "colorVehicle": "Azul",
+    "carDoorNumber": 4,
+    "fuelType": 0,
+    "mileageVehicle": 10000,
+    "locationValue": 200
+  },
+  {
+    "plate": "CBA-4321",
+    "renavamVehicle": 6436745754747,
+    "chassisVehicle": "FSA986DGS612DF",
+    "colorVehicle": "Prata",
+    "carDoorNumber": 4,
+    "fuelType": 0,
+    "mileageVehicle": 4990,
+    "locationValue": 100
   }
 ]
