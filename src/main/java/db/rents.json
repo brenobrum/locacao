@@ -1,17 +1,1 @@
-[
-  {
-    "rentDate": "2022-01-01 12:00",
-    "returnDate": "2022-01-01 12:00",
-    "foreseenReturnDate": "2022-07-02 12:00",
-    "rentMileage": 100,
-    "returnMileage": null,
-    "bailValue": 100.00,
-    "rentValue": 90.00,
-    "returned": false,
-    "rentVehiclePlate": "ABC-1234",
-    "clientCPF": "1293018992",
-    "clientName": "João da Silva",
-    "rentPurpose": "Passeio",
-    "destination": "São Paulo"
-  }
-]
+[{"rentDate":"2022-05-17 14:22","returnDate":"2022-05-17 15:46","foreseenReturnDate":"2001-11-25 12:00","rentMileage":10000,"returnMileage":100011,"bailValue":10000.0,"rentValue":200.0,"returned":true,"rentVehiclePlate":"ABC-1236","clientCPF":"12930018992","rentPurpose":"rua","destination":"sampa"}]

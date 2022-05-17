@@ -81,7 +81,7 @@ public class Search {
                 clientList.add(new Client(cpf, name, address, phone, email));
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Arquivo \"clients.json\" não foi encontrado.");
+            System.out.println("Arquivo \"clients.json\" nao foi encontrado.");
         }
         return clientList;
     }
@@ -107,7 +107,7 @@ public class Search {
                         colorVehicle, carDoorNumber, fuelType, vehicleMileage, locationValue));
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Arquivo \"vehicles.json\" não foi encontrado.");
+            System.out.println("Arquivo \"vehicles.json\" nao foi encontrado.");
         }
         return vehiclesList;
     }
@@ -138,7 +138,7 @@ public class Search {
                         rentValue, returned, rentVehiclePlate, clientCPF, rentPurpose, destination));
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Arquivo \"vehicles.json\" não foi encontrado.");
+            System.out.println("Arquivo \"vehicles.json\" nao foi encontrado.");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -153,5 +153,35 @@ public class Search {
             vehiclesList.removeIf(vehicle -> rent.getVehicle().equals(vehicle.getPlate()) && !rent.isReturned());
         }
         return vehiclesList;
+    }
+
+    public static ArrayList<Vehicle> getRentVehiclesByClient(Client client) {
+        ArrayList<Rent> rentList = getRentsList();
+        ArrayList<Vehicle> vehiclesList = getVehicleList();
+        ArrayList<Vehicle> rentVehiclesByClient = new ArrayList<>();
+
+        for (Rent rent : rentList) {
+            for (Vehicle vehicle : vehiclesList) {
+                if (rent.getClientCPF().equals(client.getCpf()) && rent.getVehicle().equals(vehicle.getPlate()) && !rent.isReturned()) {
+                    rentVehiclesByClient.add(vehicle);
+                }
+            }
+        }
+        return rentVehiclesByClient;
+    }
+
+    public static ArrayList<Rent> getRentByClient(Client client) {
+        ArrayList<Rent> rentList = getRentsList();
+        ArrayList<Vehicle> vehiclesList = getVehicleList();
+        ArrayList<Rent> rentByClient = new ArrayList<>();
+
+        for (Rent rent : rentList) {
+            for (Vehicle vehicle : vehiclesList) {
+                if (rent.getClientCPF().equals(client.getCpf()) && rent.getVehicle().equals(vehicle.getPlate()) && !rent.isReturned()) {
+                    rentByClient.add(rent);
+                }
+            }
+        }
+        return rentByClient;
     }
 }

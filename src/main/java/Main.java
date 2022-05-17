@@ -16,7 +16,7 @@ public class Main {
         System.out.println("Lista de clientes:");
 
         for (int i = 0; i < clientList.size(); i++) {
-            System.out.println(i + " - " + clientList.get(i).getName());
+            System.out.println(i + " - " + clientList.get(i).getName() + " - " + clientList.get(i).getCpf());
         }
     }
 
@@ -32,6 +32,15 @@ public class Main {
     public static void printAvailableVehiclesList() {
         ArrayList<Vehicle> vehicleList = Search.getAvailableVehiclesList();
         System.out.println("Lista de veiculos disponiveis:");
+
+        for (int i = 0; i < vehicleList.size(); i++) {
+            System.out.println(i + " - " + vehicleList.get(i).getPlate());
+        }
+    }
+
+    public static void printRentVehiclesByClient(Client client) {
+        ArrayList<Vehicle> vehicleList = Search.getRentVehiclesByClient(client);
+        System.out.println("Lista de veiculos alugados por " + client.getName() + ":");
 
         for (int i = 0; i < vehicleList.size(); i++) {
             System.out.println(i + " - " + vehicleList.get(i).getPlate());
@@ -63,20 +72,26 @@ public class Main {
         String foreseenReturnDateS = scan.nextLine();
         Date foreseenReturnDate = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(foreseenReturnDateS);
 
-        System.out.println("Valor da caucao:");
-        double bailValue = scan.nextDouble();
-
-        System.out.println("Valor da locação:");
-        double rentValue = scan.nextDouble();
+        System.out.println("Por onde andara com o veiculo:");
+        String destination = scan.nextLine();
 
         System.out.println("Finalidade da locacao:");
         String rentPurpose = scan.nextLine();
 
-        System.out.println("Por onde andara com o veiculo:");
-        String destination = scan.nextLine();
+        boolean valid = true;
+        double bailValue = 0;
+        while (valid) {
+            System.out.println("Valor da caucao:");
+            bailValue = scan.nextDouble();
 
-        Rent rent = new Rent(rentDate, rentDate, foreseenReturnDate, rentMileage, 0L,
-                bailValue, rentValue, false, vehicle.getPlate(), client.getCpf(), rentPurpose, destination);
+            if (bailValue > vehicle.getLocationValue() + 50) {
+                valid = false;
+            }else {
+                System.out.println("Valor da caucao nao pode ser menor que o valor da locacao do veiculo + 50");
+            }
+        }
+        Rent rent = new Rent(rentDate, rentDate, foreseenReturnDate, rentMileage, 0L, bailValue,
+                vehicle.getLocationValue(), false, vehicle.getPlate(), client.getCpf(), rentPurpose, destination);
 
         addRentToJson(rent);
 
@@ -89,6 +104,11 @@ public class Main {
         System.out.println("Endereco do cliente: " + client.getAddress());
         System.out.println("Telefone do cliente: " + client.getPhone());
         System.out.println("Email do cliente: " + client.getEmail());
+    }
+
+    public static Client selectClient(int index) {
+        ArrayList<Client> clientList = Search.getClientList();
+        return clientList.get(index);
     }
 
     public static Client editClient(int index) {
@@ -174,12 +194,12 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int option = scanner.nextInt();
         if (option == 1) {
-            System.out.println("1 - Cadastrar cliente:");
-            System.out.println("2 - Editar dados de cliente:");
-
             boolean valid = true;
             Client client = null;
             while (valid) {
+                System.out.println("\n1 - Cadastrar cliente: ");
+                System.out.println("2 - Editar dados de cliente: ");
+                System.out.println("3 - Selecionar cliente existente: ");
                 option = scanner.nextInt();
                 if (option == 1) {
                     client = createClient();
@@ -191,8 +211,15 @@ public class Main {
                     option = scanner.nextInt();
                     client = editClient(option);
                     valid = false;
-                } else {
-                    System.out.println("Opcao invalida!");
+                }else if (option == 3) {
+                    printClientList();
+                    System.out.println("Qual cliente deseja selecionar?");
+                    option = scanner.nextInt();
+                    client = selectClient(option);
+                    System.out.println("Selecionado " + client.getName());
+                    valid = false;
+                }else {
+                    System.out.println("Opcao invalida! Escolha outra opcao.");
                 }
             }
             System.out.println();
@@ -200,15 +227,71 @@ public class Main {
 
             System.out.println("Qual veiculo deseja locar?");
             option = scanner.nextInt();
-            Vehicle vehicle = Search.getVehicleList().get(option);
+            Vehicle vehicle = Search.getAvailableVehiclesList().get(option);
 
             Rent rent = createRent(vehicle, client);
 
-            System.out.println("Veículo " + vehicle.getPlate() + " Alugado.");
+            System.out.println("Veiculo " + vehicle.getPlate() + " Alugado.");
             System.out.println("O veículo deve ser devolvido em: " + rent.getReturnDate() + ".");
         } else if (option == 2) {
             System.out.println("Devolver veiculo:");
+            System.out.println("Qual cliente devolvera o veiculo?");
+            printClientList();
+            int clientId = scanner.nextInt();
+            Client client = selectClient(clientId);
 
+            printRentVehiclesByClient(client);
+
+            System.out.print("Qual veiculo devolvera? ");
+            int vehicleId = scanner.nextInt();
+
+            Vehicle vehicle = Search.getRentVehiclesByClient(client).get(vehicleId);
+            ArrayList<Rent> rentList = Search.getRentByClient(client);
+            Rent rent = rentList.get(vehicleId);
+
+            System.out.println("Selecionado " + vehicle.getPlate());
+
+            boolean valid = true;
+
+            long returnMileage = 0;
+            while (valid) {
+                System.out.print("Quilometragem atual do veiculo (km da locacao: " + rent.getRentMileage() + "): ");
+                returnMileage = scanner.nextLong();
+                if (returnMileage > rent.getRentMileage()) {
+                    valid = false;
+                }else {
+                    System.out.println("Quilometragem atual do veiculo nao pode ser menor que a quilometragem inicial.");
+                }
+            }
+
+            System.out.print("Veiculo danificado? (N/S)");
+            double sum = 0;
+            if (scanner.next().equals("S")) {
+                sum = vehicle.getLocationValue() * 0.1;
+                System.out.println("Adicionado R$" + sum + " ao valor total da locacao.");
+            }
+
+            Date returnDate = new Date();
+
+            if (returnDate.after(rent.getForeseenReturnDate())) {
+                sum += vehicle.getLocationValue() * 0.2;
+                System.out.println("Adicionado R$" + vehicle.getLocationValue() * 0.2 + " ao valor total da locacao.");
+            }else if (returnDate.before(rent.getForeseenReturnDate())) {
+                sum -= vehicle.getLocationValue() * 0.1;
+                System.out.println("Retirado R$" + vehicle.getLocationValue() * 0.1 + " do valor total da locacao.");
+            }
+
+            System.out.println("Valor total da locacao: R$" + (vehicle.getLocationValue() + sum));
+            System.out.print("Deseja realizar a devolucao? (N/S)");
+            if (scanner.next().toUpperCase().equals("S")) {
+                rent.setReturnDate(returnDate);
+                rent.setReturnMileage(returnMileage);
+                rent.setReturned(true);
+                editJsonList(rentList, "src\\main\\java\\db\\rents.json");
+                System.out.println("Devolucao realizada com sucesso!");
+            } else {
+                System.out.println("Devolucao cancelada!");
+            }
         } else {
             System.out.println("Opcao invalida!");
         }

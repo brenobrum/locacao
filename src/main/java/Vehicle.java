@@ -89,5 +89,4 @@ public class Vehicle {
     public void setLocationValue(double locationValue) {
         this.locationValue = locationValue;
     }
-
 }
