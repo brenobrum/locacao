@@ -1,10 +1,13 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 import com.google.gson.*;
 
 public class Main {
+
+
 
     public static void printClientList() {
         ArrayList<Client> clientList = Search.getClientList();
@@ -24,10 +27,40 @@ public class Main {
         }
     }
 
+    public static void printAvailableVehiclesList() {
+        ArrayList<Vehicle> vehicleList = Search.getAvailableVehiclesList();
+        System.out.println("Lista de Clientes:");
+
+        for (int i = 0; i < vehicleList.size(); i++) {
+            System.out.println(i + " - " + vehicleList.get(i).getPlate());
+        }
+    }
+
     public static void createClient() {
         Scanner scan = new Scanner(System.in);
         System.out.println("Digite o CPF do cliente:");
         String cpf = scan.nextLine();
+        System.out.println("Digite o nome do cliente:");
+        String name = scan.nextLine();
+        System.out.println("Digite o endereco do cliente:");
+        String address = scan.nextLine();
+        System.out.println("Digite o telefone do cliente:");
+        String phone = scan.nextLine();
+        System.out.println("Digite o e-mail do cliente:");
+        String email = scan.nextLine();
+
+        addToJson(cpf, name, address, phone, email);
+    }
+
+    public static void createRent(Vehicle vehicle) {
+        Scanner scan = new Scanner(System.in);
+        Date rentDate = new Date();
+        long rentMileage = vehicle.getVehicleMileage();
+
+
+
+        System.out.println("Em que data fara a devolução: ");
+        String foreseenReturnDate = scan.nextLine();
         System.out.println("Digite o nome do cliente:");
         String name = scan.nextLine();
         System.out.println("Digite o endereco do cliente:");
@@ -137,13 +170,19 @@ public class Main {
                     System.out.println("Qual cliente deseja editar?");
                     option = scanner.nextInt();
                     editClient(option);
-                    System.out.println("Cliente editado com sucesso!");
                     valid = false;
                 } else {
                     System.out.println("Opcao invalida!");
                 }
             }
-            printVehicleList();
+            System.out.println();
+            printAvailableVehiclesList();
+
+            System.out.println("Qual veiculo deseja locar?");
+            option = scanner.nextInt();
+
+
+
         } else if (option == 2) {
             System.out.println("Devolver veiculo:");
 

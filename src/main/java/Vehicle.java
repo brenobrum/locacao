@@ -6,11 +6,11 @@ public class Vehicle {
     String colorVehicle;
     int carDoorNumber;
     int fuelType;
-    long mileageVehicle;
+    long vehicleMileage;
     double locationValue;
 
     public Vehicle(String plate, Long renavamVehicle, String chassisVehicle,
-                   String colorVehicle, int carDoorNumber, int fuelType, long mileageVehicle,
+                   String colorVehicle, int carDoorNumber, int fuelType, long vehicleMileage,
                    double locationValue) {
         this.plate = plate;
         this.renavamVehicle = renavamVehicle;
@@ -18,7 +18,7 @@ public class Vehicle {
         this.colorVehicle = colorVehicle;
         this.carDoorNumber = carDoorNumber;
         this.fuelType = fuelType;
-        this.mileageVehicle = mileageVehicle;
+        this.vehicleMileage = vehicleMileage;
         this.locationValue = locationValue;
     }
 
@@ -74,12 +74,12 @@ public class Vehicle {
         this.fuelType = fuelType;
     }
 
-    public long getMileageVehicle() {
-        return mileageVehicle;
+    public long getVehicleMileage() {
+        return vehicleMileage;
     }
 
-    public void setMileageVehicle(long mileageVehicle) {
-        this.mileageVehicle = mileageVehicle;
+    public void setVehicleMileage(long vehicleMileage) {
+        this.vehicleMileage = vehicleMileage;
     }
 
     public double getLocationValue() {
