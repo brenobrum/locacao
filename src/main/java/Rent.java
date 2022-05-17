@@ -10,7 +10,7 @@ public class Rent {
     private double rentValue;
     private Boolean returned;
     private final String rentVehiclePlate;
-    private final String clientCPF;
+    private String clientCPF;
     private final String rentPurpose;
     private final String destination;
 
@@ -45,6 +45,10 @@ public class Rent {
 
     public String getClientCPF() {
         return clientCPF;
+    }
+
+    public void setClientCPF(String clientCPF) {
+        this.clientCPF = clientCPF;
     }
 
     public Date getForeseenReturnDate() {

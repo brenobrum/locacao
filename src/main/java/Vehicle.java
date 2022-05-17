@@ -8,10 +8,11 @@ public class Vehicle {
     int fuelType;
     long vehicleMileage;
     double locationValue;
+    Model model;
 
     public Vehicle(String plate, Long renavamVehicle, String chassisVehicle,
                    String colorVehicle, int carDoorNumber, int fuelType, long vehicleMileage,
-                   double locationValue) {
+                   double locationValue, Model model) {
         this.plate = plate;
         this.renavamVehicle = renavamVehicle;
         this.chassisVehicle = chassisVehicle;
@@ -20,7 +21,10 @@ public class Vehicle {
         this.fuelType = fuelType;
         this.vehicleMileage = vehicleMileage;
         this.locationValue = locationValue;
+        this.model = model;
     }
+
+
 
     public String vehicleConsultation(){
         return null;
@@ -76,6 +80,14 @@ public class Vehicle {
 
     public long getVehicleMileage() {
         return vehicleMileage;
+    }
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
     }
 
     public void setVehicleMileage(long vehicleMileage) {

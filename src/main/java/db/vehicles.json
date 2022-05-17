@@ -7,7 +7,11 @@
     "carDoorNumber": 4,
     "fuelType": 2,
     "vehicleMileage": 123456,
-    "locationValue": 100
+    "locationValue": 100,
+    "model": {
+      "modelDescription": "Kangoo",
+      "brand": "Renault"
+    }
   },
   {
     "plate": "ABC-1234",
@@ -17,7 +21,11 @@
     "carDoorNumber": 6,
     "fuelType": 1,
     "vehicleMileage": 234567,
-    "locationValue": 150
+    "locationValue": 150,
+    "model": {
+      "modelDescription": "Cargo",
+      "brand": "Hiunday"
+    }
   },
   {
     "plate": "ABC-1236",
@@ -27,7 +35,11 @@
     "carDoorNumber": 4,
     "fuelType": 0,
     "vehicleMileage": 10000,
-    "locationValue": 200
+    "locationValue": 200,
+    "model": {
+      "modelDescription": "HB20",
+      "brand": "Hiunday"
+    }
   },
   {
     "plate": "CBA-4321",
@@ -37,6 +49,10 @@
     "carDoorNumber": 4,
     "fuelType": 0,
     "vehicleMileage": 4990,
-    "locationValue": 100
+    "locationValue": 100,
+    "model": {
+    "modelDescription": "HB20",
+    "brand": "Hiunday"
+  }
   }
 ]
