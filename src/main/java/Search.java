@@ -6,7 +6,10 @@ import com.google.gson.JsonParser;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Search {
 
@@ -98,5 +101,34 @@ public class Search {
             System.out.println("Arquivo \"vehicles.json\" não foi encontrado.");
         }
         return vehiclesList;
+    }
+
+    public static ArrayList<Rent> getRentsList() {
+        File file = new File("src\\main\\java\\db\\rents.json");
+        ArrayList<Rent> rentList = new ArrayList<>();
+        try {
+            JsonElement jsonElement = JsonParser.parseReader(new FileReader(file));
+            JsonArray jsonArray = jsonElement.getAsJsonArray();
+            for (JsonElement object : jsonArray) {
+                JsonObject rent = object.getAsJsonObject();
+                Date rentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(rent.get("rentDate").getAsString());
+                Date returnDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(rent.get("returnDate").getAsString());
+                Long rentMileage = rent.get("rentMileage").getAsLong();
+                Long returnMileage = rent.get("rentMileage").getAsLong();
+                double bailValue = rent.get("rentMileage").getAsDouble();
+                double rentValue = rent.get("rentValue").getAsDouble();
+                Boolean returned = rent.get("returned").getAsBoolean();
+                String rentVehiclePlate = rent.get("rentVehiclePlate").getAsString();
+                String clientCPF = rent.get("clientCPF").getAsString();
+
+                rentList.add(new Rent(rentDate, returnDate, rentMileage, returnMileage, bailValue,
+                        rentValue, returned, rentVehiclePlate, clientCPF));
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Arquivo \"vehicles.json\" não foi encontrado.");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return rentList;
     }
 }

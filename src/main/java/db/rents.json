@@ -1,6 +1,13 @@
 [
-  "rentDate": "2019-01-01",
-  "Time rentTime": "12:00",
-  "String vehicle",
-  String client
+  {
+    "rentDate": "2019-01-01 12:00",
+    "returnDate": "2019-01-01 12:00",
+    "rentMileage": 100,
+    "returnMileage": null,
+    "bailValue": 100.00,
+    "rentValue": 90.00,
+    "returned": false,
+    "rentVehiclePlate": "DFA-1234",
+    "clientCPF": "1293018992"
+  }
 ]

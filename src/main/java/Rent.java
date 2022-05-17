@@ -4,23 +4,28 @@ import java.util.Date;
 
 public class Rent {
     private Date rentDate;
-    private Time rentTime;
     private Date returnDate;
-    private Time returnTime;
     private Long rentMileage;
     private Long returnMileage;
     private double bailValue;
-    private String rentValue;
+    private double rentValue;
     private Boolean returned;
     private String rentVehiclePlate;
     private String clientCPF;
 
-    public Rent(Date rentDate, Time rentTime ,String vehicle, String client) {
+
+    public Rent(Date rentDate, Date returnDate, Long rentMileage, Long returnMileage,
+                double bailValue, double rentValue, Boolean returned,
+                String rentVehiclePlate, String clientCPF) {
         this.rentDate = rentDate;
-        this.rentTime = rentTime;
-        this.rentVehiclePlate = vehicle;
-        this.clientCPF = client;
-        this.returned = false;
+        this.returnDate = returnDate;
+        this.rentMileage = rentMileage;
+        this.returnMileage = returnMileage;
+        this.bailValue = bailValue;
+        this.rentValue = rentValue;
+        this.returned = returned;
+        this.rentVehiclePlate = rentVehiclePlate;
+        this.clientCPF = clientCPF;
     }
 
     public String getVehicle() {
@@ -35,24 +40,12 @@ public class Rent {
         return rentDate;
     }
 
-    public Time getRentTime() {
-        return rentTime;
-    }
-
     public Date getReturnDate() {
         return returnDate;
     }
 
     public void setReturnDate(Date returnDate) {
         this.returnDate = returnDate;
-    }
-
-    public Time getReturnTime() {
-        return returnTime;
-    }
-
-    public void setReturnTime(Time returnTime) {
-        this.returnTime = returnTime;
     }
 
     public Long getRentMileage() {
@@ -79,11 +72,11 @@ public class Rent {
         this.bailValue = bailValue;
     }
 
-    public String getRentValue() {
+    public double getRentValue() {
         return rentValue;
     }
 
-    public void setRentValue(String rentValue) {
+    public void setRentValue(double rentValue) {
         this.rentValue = rentValue;
     }
 
