@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Model {
     String modelDescription;
-    ArrayList<Brand> brands;
+    Brand brand;
 
     public Model(String modelDescription) {
         this.modelDescription = modelDescription;
@@ -24,7 +24,7 @@ public class Model {
         this.modelDescription = modelDescription;
     }
 
-    public ArrayList<Brand> getBrands() {
-        return brands;
+    public Brand getBrand() {
+        return brand;
     }
 }

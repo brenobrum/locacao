@@ -6,13 +6,13 @@ import com.google.gson.*;
 
 public class Main {
 
-    public static ArrayList<Client> getClientList(){
+    public static ArrayList<Client> getClientList() {
         File file = new File("src\\main\\java\\db\\clients.json");
         ArrayList<Client> clientList = new ArrayList<>();
         try {
             JsonElement jsonElement = JsonParser.parseReader(new FileReader(file));
             JsonArray jsonArray = jsonElement.getAsJsonArray();
-            for (JsonElement object : jsonArray){
+            for (JsonElement object : jsonArray) {
                 JsonObject client = object.getAsJsonObject();
                 String name = client.get("name").getAsString();
                 String cpf = client.get("cpf").getAsString();
@@ -22,19 +22,19 @@ public class Main {
 
                 clientList.add(new Client(cpf, name, address, phone, email));
             }
-        }catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("Arquivo \"clients.json\" não foi encontrado.");
         }
         return clientList;
     }
 
-    public static ArrayList<Vehicle> getVehicleList(){
+    public static ArrayList<Vehicle> getVehicleList() {
         File file = new File("src\\main\\java\\db\\vehicles.json");
         ArrayList<Vehicle> vehiclesList = new ArrayList<>();
         try {
             JsonElement jsonElement = JsonParser.parseReader(new FileReader(file));
             JsonArray jsonArray = jsonElement.getAsJsonArray();
-            for (JsonElement object : jsonArray){
+            for (JsonElement object : jsonArray) {
                 JsonObject client = object.getAsJsonObject();
                 String plate = client.get("plate").getAsString();
                 Long renavamVehicle = client.get("renavamVehicle").getAsLong();
@@ -46,28 +46,28 @@ public class Main {
                 double locationValue = client.get("locationValue").getAsDouble();
 
                 vehiclesList.add(new Vehicle(plate, renavamVehicle, chassisVehicle,
-                         colorVehicle, carDoorNumber, fuelType, mileageVehicle, locationValue));
+                        colorVehicle, carDoorNumber, fuelType, mileageVehicle, locationValue));
             }
-        }catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("Arquivo \"vehicles.json\" não foi encontrado.");
         }
         return vehiclesList;
     }
 
-    public static void printClientList(){
+    public static void printClientList() {
         ArrayList<Client> clientList = getClientList();
         System.out.println("Lista de veiculos:");
 
-        for (int i = 0; i < clientList.size(); i++){
+        for (int i = 0; i < clientList.size(); i++) {
             System.out.println(i + " - " + clientList.get(i).getName());
         }
     }
 
-    public static void printVehicleList(){
+    public static void printVehicleList() {
         ArrayList<Vehicle> vehicleList = getVehicleList();
         System.out.println("Lista de Clientes:");
 
-        for (int i = 0; i < vehicleList.size(); i++){
+        for (int i = 0; i < vehicleList.size(); i++) {
             System.out.println(i + " - " + vehicleList.get(i).getPlate());
         }
     }
@@ -142,23 +142,21 @@ public class Main {
     }
 
 
-    public static void addToJson( String cpf, String name, String address, String phone, String email){
+    public static void addToJson(String cpf, String name, String address, String phone, String email) {
         Client client = new Client(cpf, name, address, phone, email);
         ArrayList<Client> clientList = getClientList();
         clientList.add(client);
         editClientList(clientList);
     }
 
-    public static void editClientList(ArrayList<Client> clientList){
+    public static void editClientList(ArrayList<Client> clientList) {
         Gson gson = new Gson();
         String json = gson.toJson(clientList);
-        try
-        {
+        try {
             BufferedWriter saida = new BufferedWriter(new FileWriter("src\\main\\java\\db\\clients.json"));
             saida.write(json);
             saida.close();
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Erro ao escrever no arquivo");
         }
@@ -171,34 +169,34 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         int option = scanner.nextInt();
-        if (option == 1){
+        if (option == 1) {
             System.out.println("1 - Cadastrar cliente:");
             System.out.println("2 - Editar dados de cliente:");
 
             boolean valid = true;
             while (valid) {
                 option = scanner.nextInt();
-                if (option == 1){
+                if (option == 1) {
                     createClient();
                     System.out.println("Cliente cadastrado com sucesso!");
                     valid = false;
-                }else if (option == 2){
+                } else if (option == 2) {
                     printClientList();
                     System.out.println("Qual cliente deseja editar?");
                     option = scanner.nextInt();
                     editClient(option);
                     System.out.println("Cliente editado com sucesso!");
                     valid = false;
-                }else{
+                } else {
                     System.out.println("Opcao invalida!");
                 }
             }
 
             printVehicleList();
-        }else if (option == 2){
+        } else if (option == 2) {
             System.out.println("Devolver veiculo:");
 
-        } else{
+        } else {
             System.out.println("Opcao invalida!");
         }
     }
