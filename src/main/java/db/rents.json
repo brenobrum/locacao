@@ -9,6 +9,9 @@
     "rentValue": 90.00,
     "returned": false,
     "rentVehiclePlate": "ABC-1234",
-    "clientCPF": "1293018992"
+    "clientCPF": "1293018992",
+    "clientName": "João da Silva",
+    "rentPurpose": "Passeio",
+    "destination": "São Paulo"
   }
 ]

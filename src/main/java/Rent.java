@@ -1,5 +1,3 @@
-import java.sql.Time;
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Rent {
@@ -13,10 +11,12 @@ public class Rent {
     private Boolean returned;
     private final String rentVehiclePlate;
     private final String clientCPF;
+    private final String rentPurpose;
+    private final String destination;
 
 
-    public Rent(Date rentDate, Date returnDate, Date foreseenReturnDate, Long rentMileage, Long returnMileage,
-                double bailValue, double rentValue, Boolean returned, String rentVehiclePlate, String clientCPF) {
+    public Rent(Date rentDate, Date returnDate, Date foreseenReturnDate, Long rentMileage, Long returnMileage, double bailValue,
+                double rentValue, Boolean returned, String rentVehiclePlate, String clientCPF, String rentPurpose, String destination) {
         this.rentDate = rentDate;
         this.returnDate = returnDate;
         this.foreseenReturnDate = foreseenReturnDate;
@@ -27,6 +27,16 @@ public class Rent {
         this.returned = returned;
         this.rentVehiclePlate = rentVehiclePlate;
         this.clientCPF = clientCPF;
+        this.rentPurpose = rentPurpose;
+        this.destination = destination;
+    }
+
+    public String getRentPurpose() {
+        return rentPurpose;
+    }
+
+    public String getDestination() {
+        return destination;
     }
 
     public String getVehicle() {

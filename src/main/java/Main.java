@@ -1,4 +1,6 @@
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -11,7 +13,7 @@ public class Main {
 
     public static void printClientList() {
         ArrayList<Client> clientList = Search.getClientList();
-        System.out.println("Lista de veiculos:");
+        System.out.println("Lista de clientes:");
 
         for (int i = 0; i < clientList.size(); i++) {
             System.out.println(i + " - " + clientList.get(i).getName());
@@ -20,7 +22,7 @@ public class Main {
 
     public static void printVehicleList() {
         ArrayList<Vehicle> vehicleList = Search.getVehicleList();
-        System.out.println("Lista de Clientes:");
+        System.out.println("Lista de veiculos:");
 
         for (int i = 0; i < vehicleList.size(); i++) {
             System.out.println(i + " - " + vehicleList.get(i).getPlate());
@@ -29,14 +31,14 @@ public class Main {
 
     public static void printAvailableVehiclesList() {
         ArrayList<Vehicle> vehicleList = Search.getAvailableVehiclesList();
-        System.out.println("Lista de Clientes:");
+        System.out.println("Lista de veiculos disponiveis:");
 
         for (int i = 0; i < vehicleList.size(); i++) {
             System.out.println(i + " - " + vehicleList.get(i).getPlate());
         }
     }
 
-    public static void createClient() {
+    public static Client createClient() {
         Scanner scan = new Scanner(System.in);
         System.out.println("Digite o CPF do cliente:");
         String cpf = scan.nextLine();
@@ -49,28 +51,36 @@ public class Main {
         System.out.println("Digite o e-mail do cliente:");
         String email = scan.nextLine();
 
-        addToJson(cpf, name, address, phone, email);
+        return addClientToJson(cpf, name, address, phone, email);
     }
 
-    public static void createRent(Vehicle vehicle) {
+    public static Rent createRent(Vehicle vehicle, Client client) throws ParseException {
         Scanner scan = new Scanner(System.in);
         Date rentDate = new Date();
         long rentMileage = vehicle.getVehicleMileage();
 
+        System.out.println("Em que data fara a devolução: Ex(25/11/2022 12:00)");
+        String foreseenReturnDateS = scan.nextLine();
+        Date foreseenReturnDate = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(foreseenReturnDateS);
 
+        System.out.println("Valor da caucao:");
+        double bailValue = scan.nextDouble();
 
-        System.out.println("Em que data fara a devolução: ");
-        String foreseenReturnDate = scan.nextLine();
-        System.out.println("Digite o nome do cliente:");
-        String name = scan.nextLine();
-        System.out.println("Digite o endereco do cliente:");
-        String address = scan.nextLine();
-        System.out.println("Digite o telefone do cliente:");
-        String phone = scan.nextLine();
-        System.out.println("Digite o e-mail do cliente:");
-        String email = scan.nextLine();
+        System.out.println("Valor da locação:");
+        double rentValue = scan.nextDouble();
 
-        addToJson(cpf, name, address, phone, email);
+        System.out.println("Finalidade da locacao:");
+        String rentPurpose = scan.nextLine();
+
+        System.out.println("Por onde andara com o veiculo:");
+        String destination = scan.nextLine();
+
+        Rent rent = new Rent(rentDate, rentDate, foreseenReturnDate, rentMileage, 0L,
+                bailValue, rentValue, false, vehicle.getPlate(), client.getCpf(), rentPurpose, destination);
+
+        addRentToJson(rent);
+
+        return rent;
     }
 
     public static void printClientDetails(Client client) {
@@ -81,7 +91,7 @@ public class Main {
         System.out.println("Email do cliente: " + client.getEmail());
     }
 
-    public static void editClient(int index) {
+    public static Client editClient(int index) {
         ArrayList<Client> clientList = Search.getClientList();
         Client client = clientList.get(index);
         Scanner scan = new Scanner(System.in);
@@ -122,23 +132,32 @@ public class Main {
                 }
                 default -> System.out.println("Opção inválida.");
             }
-            editClientList(clientList);
+            editJsonList(clientList, "src\\main\\java\\db\\clients.json");
         }
+        return client;
     }
 
 
-    public static void addToJson(String cpf, String name, String address, String phone, String email) {
+    public static Client addClientToJson(String cpf, String name, String address, String phone, String email) {
         Client client = new Client(cpf, name, address, phone, email);
         ArrayList<Client> clientList = Search.getClientList();
         clientList.add(client);
-        editClientList(clientList);
+        editJsonList(clientList, "src\\main\\java\\db\\clients.json");
+
+        return client;
     }
 
-    public static void editClientList(ArrayList<Client> clientList) {
-        Gson gson = new Gson();
-        String json = gson.toJson(clientList);
+    public static void addRentToJson(Rent rent) {
+        ArrayList<Rent> rentList = Search.getRentsList();
+        rentList.add(rent);
+        editJsonList(rentList, "src\\main\\java\\db\\rents.json");
+    }
+
+    public static void editJsonList(Object list, String src) {
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm").create();
+        String json = gson.toJson(list);
         try {
-            BufferedWriter saida = new BufferedWriter(new FileWriter("src\\main\\java\\db\\clients.json"));
+            BufferedWriter saida = new BufferedWriter(new FileWriter(src));
             saida.write(json);
             saida.close();
         } catch (IOException e) {
@@ -147,7 +166,7 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
 
         System.out.println("1 - Locar veiculo");
         System.out.println("2 - Devolver veiculo");
@@ -159,17 +178,18 @@ public class Main {
             System.out.println("2 - Editar dados de cliente:");
 
             boolean valid = true;
+            Client client = null;
             while (valid) {
                 option = scanner.nextInt();
                 if (option == 1) {
-                    createClient();
+                    client = createClient();
                     System.out.println("Cliente cadastrado com sucesso!");
                     valid = false;
                 } else if (option == 2) {
                     printClientList();
                     System.out.println("Qual cliente deseja editar?");
                     option = scanner.nextInt();
-                    editClient(option);
+                    client = editClient(option);
                     valid = false;
                 } else {
                     System.out.println("Opcao invalida!");
@@ -180,9 +200,12 @@ public class Main {
 
             System.out.println("Qual veiculo deseja locar?");
             option = scanner.nextInt();
+            Vehicle vehicle = Search.getVehicleList().get(option);
 
+            Rent rent = createRent(vehicle, client);
 
-
+            System.out.println("Veículo " + vehicle.getPlate() + " Alugado.");
+            System.out.println("O veículo deve ser devolvido em: " + rent.getReturnDate() + ".");
         } else if (option == 2) {
             System.out.println("Devolver veiculo:");
 

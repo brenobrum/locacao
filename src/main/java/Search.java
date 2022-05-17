@@ -130,9 +130,12 @@ public class Search {
                 Boolean returned = rent.get("returned").getAsBoolean();
                 String rentVehiclePlate = rent.get("rentVehiclePlate").getAsString();
                 String clientCPF = rent.get("clientCPF").getAsString();
+                String rentPurpose = rent.get("rentPurpose").getAsString();
+                String destination = rent.get("destination").getAsString();
+
 
                 rentList.add(new Rent(rentDate, returnDate, foreseenReturnDate, rentMileage, returnMileage, bailValue,
-                        rentValue, returned, rentVehiclePlate, clientCPF));
+                        rentValue, returned, rentVehiclePlate, clientCPF, rentPurpose, destination));
             }
         } catch (FileNotFoundException e) {
             System.out.println("Arquivo \"vehicles.json\" não foi encontrado.");
