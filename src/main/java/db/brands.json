@@ -1,0 +1,41 @@
+[
+  {
+    "brandDescription": "Renault",
+    "models": [
+      {
+        "modelDescription": "Kangoo",
+        "brand": "Renault"
+      },
+      {
+        "modelDescription": "Sandero",
+        "brand": "Renault"
+      }
+    ]
+  },
+  {
+    "brandDescription": "Hiunday",
+    "models": [
+      {
+        "modelDescription": "Cargo",
+        "brand": "Hiunday"
+      },
+      {
+        "modelDescription": "HB20",
+        "brand": "Hiunday"
+      }
+    ]
+  },
+  {
+    "brandDescription": "Fiat",
+    "models": [
+      {
+        "modelDescription": "Palio",
+        "brand": "Fiat"
+      },
+      {
+        "modelDescription": "Mobi",
+        "brand": "Fiat"
+      }
+    ]
+  }
+]

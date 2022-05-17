@@ -10,10 +10,11 @@ import java.util.ArrayList;
 
 public class Model {
     String modelDescription;
-    Brand brand;
+    String brand;
 
-    public Model(String modelDescription) {
+    public Model(String modelDescription, String brand) {
         this.modelDescription = modelDescription;
+        this.brand = brand;
     }
 
     public String getModelDescription() {
@@ -24,7 +25,7 @@ public class Model {
         this.modelDescription = modelDescription;
     }
 
-    public Brand getBrand() {
+    public String getBrand() {
         return brand;
     }
 }

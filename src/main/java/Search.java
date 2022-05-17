@@ -10,15 +10,46 @@ import java.util.ArrayList;
 
 public class Search {
 
-    public static void main(String[] args) {
-        for (Client client : getClientList()) {
-            System.out.println(client.getName());
+    public static ArrayList<Model> getModelList() {
+        File file = new File("src\\main\\java\\db\\models.json");
+        ArrayList<Model> modelList = new ArrayList<>();
+        try {
+            JsonElement jsonElement = JsonParser.parseReader(new FileReader(file));
+            JsonArray jsonArray = jsonElement.getAsJsonArray();
+            for (JsonElement object : jsonArray) {
+                JsonObject model = object.getAsJsonObject();
+                String modelDescription = model.get("modelDescription").getAsString();
+                String brand = model.get("brand").getAsString();
+                modelList.add(new Model(modelDescription, brand));
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Arquivo \"models.json\" não foi encontrado.");
         }
+        return modelList;
     }
 
-    public static ArrayList<Model> getModelList(){
-
-        return null;
+    public static ArrayList<Brand> getBrandList() {
+        File file = new File("src\\main\\java\\db\\brands.json");
+        ArrayList<Brand> brandList = new ArrayList<>();
+        try {
+            JsonElement jsonElement = JsonParser.parseReader(new FileReader(file));
+            JsonArray jsonArray = jsonElement.getAsJsonArray();
+            for (JsonElement object : jsonArray) {
+                JsonObject brand = object.getAsJsonObject();
+                String brandDescription = brand.get("brandDescription").getAsString();
+                ArrayList<Model> models = new ArrayList<>();
+                JsonArray jsonModels = brand.get("models").getAsJsonArray();
+                for (JsonElement modelObject : jsonModels) {
+                    JsonObject model = modelObject.getAsJsonObject();
+                    String modelDescription = model.get("modelDescription").getAsString();
+                    models.add(new Model(modelDescription, brandDescription));
+                }
+                brandList.add(new Brand(brandDescription, models));
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Arquivo \"brands.json\" não foi encontrado.");
+        }
+        return brandList;
     }
 
     public static ArrayList<Client> getClientList() {

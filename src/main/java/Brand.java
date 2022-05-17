@@ -4,8 +4,9 @@ public class Brand {
     String brandDescription;
     ArrayList<Model> models;
 
-    public Brand(String brandDescription) {
+    public Brand(String brandDescription, ArrayList<Model> models) {
         this.brandDescription = brandDescription;
+        this.models = new ArrayList<Model>(models);
     }
 
     public String getBrandDescription() {
